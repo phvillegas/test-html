@@ -15,15 +15,6 @@
     </head>
     <body>
         <div id="fb-root"></div>
-        <div
-            id="fb-comments"
-            class="fb-comments"
-            data-width="100%"
-            data-numposts="5"
-            data-order-by="reverse_time"
-            data-mobile="true"
-            style="width: 100%;">
-        </div>
 
         <script>
             (() => {
@@ -31,19 +22,30 @@
                 const params = new URLSearchParams(url.search);
                 const urlToLoad = params.get('url');
 
-                if (urlToLoad) {
-                    document.getElementById('fb-comments').setAttribute('data-href', urlToLoad);
+                if (!urlToLoad) {
+                    window.ReactNativeWebView.postMessage('no-url');
 
-                    FB.Event.subscribe('xfbml.render', () => {
-                        window.ReactNativeWebView.postMessage('comments-rendered')
-                    });
-
-                    return true;
+                    return false;
                 }
 
-                window.ReactNativeWebView.postMessage('no-url');
+                const commentsTag = document.createElement('div');
+                commentsTag.setAttribute('class', 'fb-comments');
+                commentsTag.setAttribute('data-href', urlToLoad);
+                commentsTag.setAttribute('data-numposts', '5');
+                commentsTag.setAttribute('data-order-by', 'reverse_time');
+                commentsTag.setAttribute('data-width', '100%');
+                commentsTag.setAttribute('data-mobile', 'true');
+                commentsTag.setAttribute('fb-xfbml-state', 'rendered');
+                commentsTag.style.width = '100%';
+                document.body.appendChild(commentsTag);
 
-                return false;
+                // document.getElementById('fb-comments').setAttribute('data-href', urlToLoad);
+
+                FB.Event.subscribe('xfbml.render', () => {
+                    window.ReactNativeWebView.postMessage('comments-rendered')
+                });
+
+                return true;
             })();
         </script>
     </body>
