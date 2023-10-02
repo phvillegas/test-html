@@ -39,11 +39,11 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
-                // document.getElementById('fb-comments').setAttribute('data-href', urlToLoad);
-
-                FB.Event.subscribe('xfbml.render', () => {
-                    window.ReactNativeWebView.postMessage('comments-rendered')
-                });
+                window.addEventListener('load', () =>
+                    FB.Event.subscribe('xfbml.render', () =>
+                        window.ReactNativeWebView.postMessage('comments-rendered')
+                    )
+                )
 
                 return true;
             })();
