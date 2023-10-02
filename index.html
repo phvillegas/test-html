@@ -39,11 +39,17 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
+                /*
                 window.addEventListener('load', () =>
                     FB.Event.subscribe('xfbml.render', () =>
                         window.ReactNativeWebView.postMessage('ready')
                     )
-                )
+                ) */
+
+                if (document.body.getInnerHTML().includes('comments Facebook Social Plugin')) {
+                    console.log('comments Facebook Social Plugin');
+                    window.ReactNativeWebView.postMessage('ready');
+                }
 
                 return true;
             })();
