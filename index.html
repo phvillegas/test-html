@@ -27,9 +27,11 @@
 
         <script>
             window.addEventListener('load', () => {
-                FB.Event.subscribe('xfbml.render', () => console.log("finished rendering plugins"));
-                
                 window.ReactNativeWebView.postMessage('page-loaded')
+
+                FB.Event.subscribe('xfbml.render', () => {
+                    window.ReactNativeWebView.postMessage('comments-rendered')
+                });
             })
 
             /*
