@@ -41,7 +41,7 @@
 
                 window.addEventListener('load', () =>
                     FB.Event.subscribe('xfbml.render', () =>
-                        window.ReactNativeWebView.postMessage('comments-rendered')
+                        window.ReactNativeWebView.postMessage('ready')
                     )
                 )
 
