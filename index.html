@@ -4,8 +4,7 @@
         <meta charset="UTF-8" />
         <title>Facebook Comments</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0"></script>
-        <script src="https://connect.facebook.net/es_LA/sdk.js?hash=857cc94e604b3738e9011a79bc6b4781" async="" crossorigin="anonymous"></script>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0" nonce="BXjDf5QV"></script>
         <style>
             body,html{background:#FFF;margin:0;padding:0}
             body{padding:0 15px}
@@ -22,6 +21,7 @@
             data-width="100%"
             data-numposts="5"
             data-order-by="reverse_time"
+            data-mobile="true"
             style="width: 100%;">
         </div>
 
@@ -30,9 +30,11 @@
                 window.ReactNativeWebView.postMessage('page-loaded')
             })
 
+            /*
             window.addEventListener('message', (event) => {
                 console.log('message received', event)
-            })
+            })*/
+            FB.Event.subscribe('xfbml.render', () => console.log("finished rendering plugins"));
         </script>
     </body>
 </html>
