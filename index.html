@@ -27,7 +27,7 @@
 
         <script>
             window.addEventListener('load', () => {
-                window.postMessage('page-loaded')
+                window.ReactNativeWebView.postMessage('page-loaded')
             })
 
             window.addEventListener('message', (event) => {
