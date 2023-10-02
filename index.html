@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <title>Facebook Comments</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0" nonce="BXjDf5QV"></script>
+        <script crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v18.0" nonce="BXjDf5QV"></script>
         <style>
             body,html{background:#FFF;margin:0;padding:0}
             body{padding:0 15px}
@@ -39,9 +39,15 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
+                FB.Event.subscribe("xfbml.render", () => window.ReactNativeWebView.postMessage('fb loaded'));
+
                 return true;
             })();
 
+            /*
+            window.addEventListener('load', () => {
+                window.ReactNativeWebView.postMessage('loaded');
+            })
             let count = 0;
             const timeout = setInterval(() => {
                 if (document.body.getInnerHTML().includes('comments Facebook Social Plugin')) {
@@ -55,7 +61,7 @@
                 }
 
                 count++;
-            }, 500)
+            }, 500) */
         </script>
     </body>
 </html>
