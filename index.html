@@ -40,17 +40,17 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
-                const timeout = setTimeout(() => {
+                const timeout = setInterval(() => {
                     if (document.body.getInnerHTML().includes('comments Facebook Social Plugin')) {
                         window.ReactNativeWebView.postMessage('ready');
                         clearTimeout(timeout);
                     }
-                    
+
                     if (count === 10) {
                         window.ReactNativeWebView.postMessage('error');
                         clearTimeout(timeout);
                     }
-                    
+
                     count++;
                 }, 500)
 
