@@ -21,6 +21,7 @@
                 const url = new URL(window.location.href);
                 const params = new URLSearchParams(url.search);
                 const urlToLoad = params.get('url');
+                let count = 0;
 
                 if (!urlToLoad) {
                     window.ReactNativeWebView.postMessage('no-url');
@@ -39,23 +40,22 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
-                /*
-                window.addEventListener('load', () =>
-                    FB.Event.subscribe('xfbml.render', () =>
-                        window.ReactNativeWebView.postMessage('ready')
-                    )
-                ) */
-
-
+                const timeout = setTimeout(() => {
+                    if (document.body.getInnerHTML().includes('comments Facebook Social Plugin')) {
+                        window.ReactNativeWebView.postMessage('ready');
+                        clearTimeout(timeout);
+                    }
+                    
+                    if (count === 10) {
+                        window.ReactNativeWebView.postMessage('error');
+                        clearTimeout(timeout);
+                    }
+                    
+                    count++;
+                }, 500)
 
                 return true;
             })();
-
-            window.onload = () => {
-                FB.Event.subscribe("xfbml.render", () => {
-                    window.ReactNativeWebView.postMessage('ready')
-                });
-            };
         </script>
     </body>
 </html>
