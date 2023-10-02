@@ -39,29 +39,10 @@
                 commentsTag.style.width = '100%';
                 document.body.appendChild(commentsTag);
 
-                FB.Event.subscribe("xfbml.render", () => window.ReactNativeWebView.postMessage('fb loaded'));
+                FB.Event.subscribe("xfbml.render", () => window.ReactNativeWebView.postMessage('ready'));
 
                 return true;
             })();
-
-            /*
-            window.addEventListener('load', () => {
-                window.ReactNativeWebView.postMessage('loaded');
-            })
-            let count = 0;
-            const timeout = setInterval(() => {
-                if (document.body.getInnerHTML().includes('comments Facebook Social Plugin')) {
-                    window.ReactNativeWebView.postMessage('ready');
-                    clearTimeout(timeout);
-                }
-
-                if (count === 10) {
-                    window.ReactNativeWebView.postMessage('error');
-                    clearTimeout(timeout);
-                }
-
-                count++;
-            }, 500) */
         </script>
     </body>
 </html>
