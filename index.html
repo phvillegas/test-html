@@ -26,7 +26,13 @@
         </div>
 
         <script>
-            window.addEventListener('load', () => console.log('page is fully loaded'))
+            window.addEventListener('load', () => {
+                window.postMessage('page-loaded')
+            })
+
+            window.addEventListener('message', (event) => {
+                console.log('message received', event)
+            })
         </script>
     </body>
 </html>
